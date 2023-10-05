@@ -6,6 +6,8 @@ import "./App.css";
 import HomePage from "./pages/HomePage/HomePage";
 import LoginPage from "./pages/LoginPage/LoginPage";
 import RegisterPage from "./pages/RegisterPage/RegisterPage";
+import Gallery from "./pages/Gallery/Gallery"; // Updated import
+import Blog from "./pages/Blog/Blog"; // Updated import for Blog
 
 // Component Imports
 import Navbar from "./components/NavBar/NavBar";
@@ -29,6 +31,8 @@ function App() {
         />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/login" element={<LoginPage />} />
+        <Route path="/gallery" element={<Gallery />} /> {/* New route for Gallery */}
+        <Route path="/blog" element={<Blog />} /> {/* New route for Blog */}
       </Routes>
       <Footer />
     </div>
