@@ -6,12 +6,13 @@ import "./App.css";
 import HomePage from "./pages/HomePage/HomePage";
 import LoginPage from "./pages/LoginPage/LoginPage";
 import RegisterPage from "./pages/RegisterPage/RegisterPage";
-import Gallery from "./pages/Gallery/Gallery"; // Updated import
-import Blog from "./pages/Blog/Blog"; // Updated import for Blog
+import Gallery from "./pages/Gallery/Gallery"; 
+import Blog from "./pages/Blog/Blog"; 
 
 // Component Imports
 import Navbar from "./components/NavBar/NavBar";
 import Footer from "./components/Footer/Footer";
+import ImageForm from "./components/ImageForm/ImageForm";
 
 // Util Imports
 import PrivateRoute from "./utils/PrivateRoute";
@@ -31,8 +32,9 @@ function App() {
         />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/login" element={<LoginPage />} />
-        <Route path="/gallery" element={<Gallery />} /> {/* New route for Gallery */}
-        <Route path="/blog" element={<Blog />} /> {/* New route for Blog */}
+        <Route path="/gallery" element={<Gallery />} />{" "}
+        <Route path="/blog" element={<Blog />} /> 
+        <Route path="/upload-image" element={<ImageForm />} />
       </Routes>
       <Footer />
     </div>
