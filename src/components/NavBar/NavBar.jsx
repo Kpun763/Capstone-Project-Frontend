@@ -24,6 +24,7 @@ const Navbar = () => {
               <Link to="/gallery">Gallery</Link>
             </li>
             <li>
+              
               <input type="text" placeholder="Search for anime..." />
               <button>Search</button>
             </li>
