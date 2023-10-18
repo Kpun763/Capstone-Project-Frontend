@@ -8,6 +8,7 @@ import LoginPage from "./pages/LoginPage/LoginPage";
 import RegisterPage from "./pages/RegisterPage/RegisterPage";
 import Gallery from "./pages/Gallery/Gallery"; 
 import Blog from "./pages/Blog/Blog"; 
+import SearchResults from "./pages/SearchResults/SearchResults";
 
 // Component Imports
 import Navbar from "./components/NavBar/NavBar";
@@ -35,6 +36,7 @@ function App() {
         <Route path="/gallery" element={<Gallery />} />
         <Route path="/blog" element={<Blog />} />
         <Route path="/upload-image" element={<ImageForm />} />
+        <Route path="/search" element={<SearchResults />} />
       </Routes>
       <Footer />
     </div>

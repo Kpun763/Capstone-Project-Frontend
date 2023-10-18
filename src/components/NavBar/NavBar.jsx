@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import AuthContext from "../../context/AuthContext";
 import "./NavBar.css";
-import SearchResults from "../SearchResults/SearchResults";
+import SearchResults from "../../pages/SearchResults/SearchResults";
 
 const Navbar = () => {
   const { logoutUser, user } = useContext(AuthContext);
@@ -11,21 +11,12 @@ const Navbar = () => {
   const [searchResults, setSearchResults] = useState([]);
   const [showResults, setShowResults] = useState(false);
 
-  const handleSearch = () => {
-    fetch(`/api/anime?search=${searchTerm}`)
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
-        return response.json();
-      })
-      .then((data) => {
-        setSearchResults(data);
-        setShowResults(true); // Display search results
-      })
-      .catch((error) => {
-        console.error("Error fetching search results:", error);
-      });
+  const handleSearch = (e) => {
+    e.preventDefault();
+    if (searchTerm.trim() !== "") {
+      // Use the to prop of the Link component to navigate with route parameters
+      navigate(`/search?anime=${encodeURIComponent(searchTerm)}`);
+    }
   };
 
   return (
