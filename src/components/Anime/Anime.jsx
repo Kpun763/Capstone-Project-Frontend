@@ -1,3 +1,6 @@
+import React from "react";
+
+
 const Anime = ({id, title, pictureUrl}) => {
     return (
         <div>
