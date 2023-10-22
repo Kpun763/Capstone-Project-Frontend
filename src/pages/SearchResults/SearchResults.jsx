@@ -1,24 +1,52 @@
 import React, { useState, useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 import axios from "axios";
+import Anime from "../../components/Anime/Anime";
+import useAuth from "../../hooks/useAuth";
 
 const SearchResults = ({}) => {
   const [searchParams] = useSearchParams();
   const anime = searchParams.get("anime");
   const [searchResults, setSearchResults] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [showResults, setShowResults] = useState(false);
+  const [user, token] = useAuth();
 
+  const fetchAnime = async () => {
+    try {
+      const response = await fetch(
+        `https://localhost:5001/api/proxy/anime/search?searchTerm=${anime}`,
+        {
+          headers: {
+            Authorization: "Bearer " + token,
+          },
+        }
+      );
+  
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+  
+      const data = await response.json();
+  
+      // Update your component state with the anime search results
+      setSearchResults(data.data); // Access the 'data' property in the response
+  
+      // Rest of your code
+    } catch (error) {
+      console.error("Error fetching search results:", error);
+    }
+  };
   useEffect(() => {
-    const fetchAnime = async () => {
+    fetchAnime();
+  }, [anime]);
+
+  //Handles my API response:
+  const handleSearch = async () => {
+    if (searchTerm.trim() !== "") {
       try {
         const response = await fetch(
-          `https://api.myanimelist.net/v2/anime?q=${anime}&limit=20`,
-          {
-            headers: {
-              "X-MAL-CLIENT-ID": "4c9b309b7dc9dc87f29fbf259084aac5",
-              Authorization:
-                "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6Imttb3JnMSIsImVtYWlsIjoia3lsZUBreS5reWxlIiwiaWQiOiI4NThlNWE1YS02Mzk4LTRmMjYtYTFlMi03NDNhZTQ0N2U2YWQiLCJleHAiOjE2OTc3MjgwOTcsImlzcyI6IkZ1bGxTdGFja0F1dGhfV2ViQVBJIiwiYXVkIjoiaHR0cHM6Ly9sb2NhbGhvc3Q6NTAwMSJ9.F4K_Aie1Mho_nhfoWRFadMpVe5BVHLdF4t1W5HTJYzE",
-            },
-          }
+          `https://localhost:5001/api/proxy/anime/search?searchTerm=${searchTerm}`
         );
 
         if (!response.ok) {
@@ -26,14 +54,15 @@ const SearchResults = ({}) => {
         }
 
         const data = await response.json();
-        setSearchResults(data.data);
+
+        // Update your component state with the anime search results
+        setSearchResults(data);
+        setShowResults(true);
       } catch (error) {
         console.error("Error fetching search results:", error);
       }
-    };
-
-    fetchAnime();
-  }, [anime]);
+    }
+  };
 
   return (
     <div>
@@ -41,14 +70,18 @@ const SearchResults = ({}) => {
         <div>
           <h2>Search Results</h2>
           <ul>
-            {searchResults.map((result) => (
-              <li key={result.node.id}>
-                <strong>Title: {result.node.title}</strong>
-                <p>Description: {result.node.description}</p>
-                {}
-              </li>
-            ))}
-          </ul>
+  {searchResults.map((result) => (
+    <li key={result.node.id}>
+      <strong>Title: {result.node.title}</strong>
+      {result.node.mainPicture ? (
+        <img src={result.node.mainPicture.medium} alt={result.node.title} />
+      ) : (
+        <p>No image available</p>
+      )}
+    </li>
+  ))}
+</ul>
+
         </div>
       ) : (
         <p>No results found.</p>

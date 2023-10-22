@@ -1,8 +1,7 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import AuthContext from "../../context/AuthContext";
 import "./NavBar.css";
-import SearchResults from "../../pages/SearchResults/SearchResults";
 
 const Navbar = () => {
   const { logoutUser, user } = useContext(AuthContext);
@@ -10,6 +9,12 @@ const Navbar = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const [showResults, setShowResults] = useState(false);
+
+  useEffect(() => {
+    if (showResults && searchResults.length > 0) {
+      setShowResults(false);
+    }
+  }, [showResults, searchResults]);
 
   const handleSearch = (e) => {
     e.preventDefault();
@@ -50,8 +55,6 @@ const Navbar = () => {
             </li>
           </>
         )}
-
-        {showResults && <SearchResults searchResults={searchResults} />}
 
         <li>
           {user ? (
