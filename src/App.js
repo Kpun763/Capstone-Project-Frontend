@@ -10,6 +10,7 @@ import RegisterPage from "./pages/RegisterPage/RegisterPage";
 import Gallery from "./pages/Gallery/Gallery"; 
 import Blog from "./pages/Blog/Blog"; 
 import SearchResults from "./pages/SearchResults/SearchResults";
+import FriendsPage from "./pages/FriendsPage/FriendsPage";
 
 // Component Imports
 import Navbar from "./components/NavBar/NavBar";
@@ -38,6 +39,7 @@ function App() {
         <Route path="/blog" element={<Blog />} />
         <Route path="/upload-image" element={<ImageForm />} />
         <Route path="/search" element={<SearchResults />} />
+        <Route path="/friends" element={<FriendsPage />} />
       </Routes>
       <Footer />
     </div>

@@ -45,6 +45,10 @@ const Navbar = () => {
               <Link to="/gallery">Gallery</Link>
             </li>
             <li>
+              <Link to="/friends">Friends</Link> {/* Add this line for Friends */}
+            </li>
+
+            <li>
               <input
                 type="text"
                 placeholder="Search for anime..."
