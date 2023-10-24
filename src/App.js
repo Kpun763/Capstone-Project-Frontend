@@ -11,6 +11,7 @@ import Gallery from "./pages/Gallery/Gallery";
 import Blog from "./pages/Blog/Blog"; 
 import SearchResults from "./pages/SearchResults/SearchResults";
 import FriendsPage from "./pages/FriendsPage/FriendsPage";
+import CreateBlog from "./pages/CreateBlog/CreateBlog";
 
 // Component Imports
 import Navbar from "./components/NavBar/NavBar";
@@ -40,6 +41,7 @@ function App() {
         <Route path="/upload-image" element={<ImageForm />} />
         <Route path="/search" element={<SearchResults />} />
         <Route path="/friends" element={<FriendsPage />} />
+        <Route path="/create-blog" element={<CreateBlog />}/>
       </Routes>
       <Footer />
     </div>

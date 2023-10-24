@@ -11,60 +11,25 @@ const HomePage = () => {
   const [galleryItems, setGalleryItems] = useState([]);
 
   useEffect(() => {
-    // Fetch blog posts
-    axios.get("/api/blog/posts").then((response) => {
-      setBlogPosts(response.data);
-    });
-
-    // Fetch reviews
-    axios.get("/api/reviews").then((response) => {
-      setReviews(response.data);
-    });
-
-    // Fetch gallery items
-    axios.get("/api/gallery").then((response) => {
-      setGalleryItems(response.data);
-    });
+    fetchData();
   }, []);
 
-  return (
-    <div className="container">
-      <h1>Welcome to {user.userName}'s Homepage!</h1>
+  const fetchData = async () => {
+    try {
+      const blogResponse = await axios.get(
+        "https://localhost:5001/api/blogpost/posts"
+      );
+      setBlogPosts(blogResponse.data);
+      const reviewsResponse = await axios.get(
+        "https://localhost:5001/api/reviews"
+      );
+      setReviews(reviewsResponse.data);
+    } catch (error) {
+      console.warn("Error in FetchData request: ", error);
+    }
+  };
 
-      <section>
-        <h2>Blog Posts</h2>
-        <ul>
-          {blogPosts.map((post) => (
-            <li key={post.id}>
-              <Link to={`/blog/${post.id}`}>{post.title}</Link>
-            </li>
-          ))}
-        </ul>
-      </section>
-
-      <section>
-        <h2>Reviews</h2>
-        <ul>
-          {reviews.map((review) => (
-            <li key={review.id}>
-              <Link to={`/reviews/${review.id}`}>{review.text}</Link>
-            </li>
-          ))}
-        </ul>
-      </section>
-
-      <section>
-        <h2>Gallery</h2>
-        <ul>
-          {galleryItems.map((item) => (
-            <li key={item.id}>
-              <Link to={`/gallery/${item.id}`}>{item.name}</Link>
-            </li>
-          ))}
-        </ul>
-      </section>
-    </div>
-  );
+  return <div></div>;
 };
 
 export default HomePage;
