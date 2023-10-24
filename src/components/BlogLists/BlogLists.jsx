@@ -1,4 +1,6 @@
-const BlogLists = (title, content) => {
+import React from "react";
+
+const BlogLists = ({title, content}) => {
     return ( 
         <div>
             <div>

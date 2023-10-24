@@ -1,0 +1,19 @@
+.layout {
+    display: flex;
+    justify-content: space-around;
+    flex-direction: row-reverse;
+    flex-wrap: wrap;
+    align-content: space-between;
+    margin: 5%;
+    right: 20px;
+    left: 20px;
+    position: relative;
+}
+
+.search {
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: flex-start;
+}
+
+

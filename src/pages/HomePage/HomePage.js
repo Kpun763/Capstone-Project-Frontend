@@ -3,12 +3,12 @@ import { useEffect, useState } from "react";
 import useAuth from "../../hooks/useAuth";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import BlogLists from "../../components/BlogLists/BlogLists";
 
 const HomePage = () => {
   const [user, token] = useAuth();
   const [blogPosts, setBlogPosts] = useState([]);
   const [reviews, setReviews] = useState([]);
-  const [galleryItems, setGalleryItems] = useState([]);
 
   useEffect(() => {
     fetchData();
@@ -29,7 +29,17 @@ const HomePage = () => {
     }
   };
 
-  return <div></div>;
+  return <div>
+    <div>
+    {blogPosts.map((blog) => (
+              <BlogLists
+                key={blog.id}
+                title={blog.title}
+                content={blog.content}
+              />
+            ))}
+    </div>
+  </div>;
 };
 
 export default HomePage;

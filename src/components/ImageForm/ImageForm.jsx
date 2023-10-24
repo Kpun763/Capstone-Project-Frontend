@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import axios from "axios";
+import useAuth from "../../hooks/useAuth";
 
 const ImageForm = ({ onImageUpload }) => {
   const [selectedFile, setSelectedFile] = useState(null);
+  const [user, token] = useAuth();
 
   const handleFileChange = (e) => {
     const file = e.target.files[0];
@@ -17,11 +19,16 @@ const ImageForm = ({ onImageUpload }) => {
         formData.append("image", selectedFile);
 
         // Make an API request to upload the image
-        const response = await axios.post("/api/gallery/upload", formData, {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        });
+        const response = await axios.post(
+          "https://localhost:5001/api/gallery",
+          formData,
+          {
+            headers: {
+              "Content-Type": "multipart/form-data",
+              Authorization: "Bearer " + token,
+            },
+          }
+        );
 
         // Call the onImageUpload callback with the uploaded image data (if needed)
         onImageUpload(response.data);
@@ -43,7 +50,12 @@ const ImageForm = ({ onImageUpload }) => {
   return (
     <div>
       <h2>Upload Image</h2>
-      <input type="file" accept="image/*" onChange={handleFileChange} />
+      <input
+        type="file"
+        name="Images"
+        accept="image/jpeg,image/png,image/gif"
+        onChange={handleFileChange}
+      />
       <button onClick={handleUploadClick}>Upload</button>
     </div>
   );

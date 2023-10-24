@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
+import "./SearchResults.css";
 
 const SearchResults = () => {
   const [searchParams] = useSearchParams();
@@ -44,9 +45,9 @@ const SearchResults = () => {
       {searchResults && searchResults.length > 0 ? (
         <div>
           <h2>Search Results</h2>
-          <ul>
+          <ul className="search">
             {searchResults.map((result) => (
-              <li key={result.node.id}>
+              <li key={result.node.id} className="layout">
                 <strong>Title: {result.node.title}</strong>
                 <p>Description: {result.node.description}</p>
                 {result.node.main_picture ? (
