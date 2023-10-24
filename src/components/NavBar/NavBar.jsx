@@ -4,7 +4,6 @@ import AuthContext from "../../context/AuthContext";
 import "./NavBar.css";
 import axios from "axios";
 
-
 const Navbar = () => {
   const { logoutUser, user } = useContext(AuthContext);
   const navigate = useNavigate();
@@ -68,11 +67,7 @@ const Navbar = () => {
       <ul>
         <li className="brand">
           <Link to="/" style={{ textDecoration: "none", color: "white" }}>
-            <b>
-              {user
-                ? `Welcome, ${user.userName}!`
-                : "React/ASP.NET JWT Starter"}
-            </b>
+            <b>{user ? `Welcome, ${user.userName}!` : "Kyle's Capstone"}</b>
           </Link>
         </li>
         {user && (
@@ -109,7 +104,6 @@ const Navbar = () => {
         </li>
       </ul>
       {/* Pass notifications and handling functions to the Notifications component */}
-      
     </div>
   );
 };

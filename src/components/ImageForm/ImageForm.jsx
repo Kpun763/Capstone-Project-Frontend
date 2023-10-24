@@ -11,7 +11,9 @@ const ImageForm = ({ onImageUpload }) => {
     setSelectedFile(file);
   };
 
-  const handleUploadClick = async () => {
+  const handleUploadClick = async (e) => {
+    e.preventDefault();
+
     if (selectedFile) {
       try {
         // Create a FormData object and append the selected image
@@ -30,9 +32,6 @@ const ImageForm = ({ onImageUpload }) => {
           }
         );
 
-        // Call the onImageUpload callback with the uploaded image data (if needed)
-        onImageUpload(response.data);
-
         // Optionally, you can reset the selected file state
         setSelectedFile(null);
 
@@ -49,14 +48,16 @@ const ImageForm = ({ onImageUpload }) => {
 
   return (
     <div>
-      <h2>Upload Image</h2>
-      <input
-        type="file"
-        name="Images"
-        accept="image/jpeg,image/png,image/gif"
-        onChange={handleFileChange}
-      />
-      <button onClick={handleUploadClick}>Upload</button>
+      <form onSubmit={handleUploadClick}>
+        <h2>Upload Image</h2>
+        <input
+          type="file"
+          name="Images"
+          accept="image/jpeg,image/png,image/gif"
+          onChange={handleFileChange}
+        />
+        <button type="submit">Upload Image</button>
+      </form>
     </div>
   );
 };
